@@ -8,7 +8,19 @@ echo "Install microcode and graphics"
 xbps-install -Syu
 
 # Install packages
-xbps-install -S socklog-void cronie chrony NetworkManager seatd mesa-dri wayland sway xorg-utils xorg-user-dirs xorg-desktop-portal-wlr
+xbps-install -S \
+  socklog-void \
+  cronie \
+  chrony \
+  NetworkManager \
+  seatd \
+  mesa-dri \
+  wayland \
+  sway \
+  xdg-utils \
+  xdg-user-dirs \
+  xdg-desktop-portal-wlr\
+  /
 
 # Create services
 ln -s /etc/sv/socklog-unix /var/service
