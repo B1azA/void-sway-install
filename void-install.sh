@@ -44,20 +44,21 @@ sv up seatd
 sv up dbus
 
 # Trimming for SSD
-echo -e "#!/bin/sh
-fstrim /" > /etc/cron.weekly/fstrim
+echo '#!/bin/sh
+fstrim /' >> /etc/cron.weekly/fstrim
 
 chmod u+x /etc/cron.weekly/fstrim
 
 # Set XDG_RUNTIME_DIR (/etc/profile)
-echo -e "if [[ "$(tty)" == "/dev/tty1" ]]; then
+echo 'if [[ "$(tty)" == "/dev/tty1" ]]; then
   if test -z "${XDG_RUNTIME_DIR}"; then
     export XDG_RUNTIME_DIR=/tmp/${UID}-runtime-dir
     if ! test -d "${XDG_RUNTIME_DIR}"; then
       mkdir "${XDG_RUNTIME_DIR}"
       chmod 0700 "${XDG_RUNTIME_DIR}"
+      usermod -aG _seatd $USER
     fi
   fi
-fi" > /etc/profile
+fi' >> /etc/profile
 
 echo "Reboot!!!"
