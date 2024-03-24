@@ -19,8 +19,7 @@ xbps-install -S \
   sway \
   xdg-utils \
   xdg-user-dirs \
-  xdg-desktop-portal-wlr\
-  /
+  xdg-desktop-portal-wlr
 
 # Create services
 ln -s /etc/sv/socklog-unix /var/service
