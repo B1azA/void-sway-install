@@ -13,7 +13,8 @@ xbps-install -S \
   cronie \
   chrony \
   NetworkManager \
-  seatd \
+  elogind \
+  polkit \
   mesa-dri \
   wayland \
   sway \
@@ -45,20 +46,8 @@ sv up dbus
 
 # Trimming for SSD
 echo '#!/bin/sh
-fstrim /' >> /etc/cron.weekly/fstrim
+fstrim /' > /etc/cron.weekly/fstrim
 
 chmod u+x /etc/cron.weekly/fstrim
-
-# Set XDG_RUNTIME_DIR (/etc/profile)
-echo 'if [[ "$(tty)" == "/dev/tty1" ]]; then
-  if test -z "${XDG_RUNTIME_DIR}"; then
-    export XDG_RUNTIME_DIR=/tmp/${UID}-runtime-dir
-    if ! test -d "${XDG_RUNTIME_DIR}"; then
-      mkdir "${XDG_RUNTIME_DIR}"
-      chmod 0700 "${XDG_RUNTIME_DIR}"
-      usermod -aG _seatd $USER
-    fi
-  fi
-fi' >> /etc/profile
 
 echo "Reboot!!!"
