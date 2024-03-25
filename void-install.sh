@@ -28,7 +28,6 @@ ln -s /etc/sv/nanoklogd /var/service
 ln -s /etc/sv/cronie /var/service
 ln -s /etc/sv/chronyd /var/service
 ln -s /etc/sv/NetworkManager /var/service
-ln -s /etc/sv/seatd /var/service
 ln -s /etc/sv/dbus /var/service
 
 # Remove services
@@ -41,7 +40,6 @@ sv up nanoklogd
 sv up cronie
 sv up chronyd
 sv up NetworkManager
-sv up seatd
 sv up dbus
 
 # Trimming for SSD
