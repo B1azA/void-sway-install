@@ -1,8 +1,8 @@
 #!/bin/bash
-# After install
-# - microcode
-
-echo "Install microcode and graphics"
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
 
 # Update
 xbps-install -Syu
@@ -17,10 +17,20 @@ xbps-install -S \
   polkit \
   mesa-dri \
   wayland \
+  wlroots \
   sway \
   xdg-utils \
   xdg-user-dirs \
-  xdg-desktop-portal-wlr
+  xdg-desktop-portal-wlr \
+  foot \
+  dmenu \
+  wmenu \
+  noto-fonts-ttf \
+  qt5-wayland \
+  xdg-desktop-portal-gtk \
+  pipewire \
+  libsa-bluetooth \
+  bluez
 
 # Create services
 ln -s /etc/sv/socklog-unix /var/service
@@ -29,18 +39,11 @@ ln -s /etc/sv/cronie /var/service
 ln -s /etc/sv/chronyd /var/service
 ln -s /etc/sv/NetworkManager /var/service
 ln -s /etc/sv/dbus /var/service
+ln -s /etc/sv/bluetoothd /var/service
 
 # Remove services
 rm /var/service/dhcpcd
 rm /var/service/wpa_supplicant
-
-# Run services
-sv up socklog-unix
-sv up nanoklogd
-sv up cronie
-sv up chronyd
-sv up NetworkManager
-sv up dbus
 
 # Trimming for SSD
 echo '#!/bin/sh
@@ -48,4 +51,28 @@ fstrim /' > /etc/cron.weekly/fstrim
 
 chmod u+x /etc/cron.weekly/fstrim
 
-echo "Reboot!!!"
+echo 'export QT_QPA_PLATFORM=wayland-eql
+export ELM_DISPLAY=wl
+export SDL_VIDEODRIVER=wayland
+export MOZ_ENABLE_WAYLAND=1
+
+# Start sway if TTY1
+if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec sway
+fi' >> /etc/profile
+
+# Sway
+cd ~
+mkdir ~/.config
+cp /etc/sway ~/.config/
+
+# Audio
+mkdir -p /etc/pipewire/pipewire.conf.d
+ln -s /usr/share/examples/wireplumper/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
+ln -s /usr/share/examples/wireplumper/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
+
+# Bluetooth
+usermod -a -G bluetooth $USER
+
+echo "Don't forget to install microcode and graphics!"
+echo "Reboot now!!!"
