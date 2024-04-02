@@ -5,4 +5,13 @@
 
 ## Notes
 
-- don't forget to **run PipeWire** in sway config (exec pipewire)
+### In Sway config
+
+- don't forget to **run PipeWire**
+  ```
+  exec pipewire
+  ```
+- **set XDG_CURRENT_DESKTOP** for screensharing to work
+  ```
+  exec dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=$nameofcompositor
+  ```
