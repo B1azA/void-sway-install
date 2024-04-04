@@ -50,6 +50,7 @@ select trim in Yes No; do
   echo $trim;
   case $trim in
     Yes)
+      chmod u+x /etc/cron.weekly/fstrim
       echo '#!/bin/sh
       fstrim /' > /etc/cron.weekly/fstrim
       break
@@ -62,8 +63,6 @@ select trim in Yes No; do
     ;;
   esac
 done
-
-chmod u+x /etc/cron.weekly/fstrim
 
 echo 'export QT_QPA_PLATFORM=wayland-eql
 export ELM_DISPLAY=wl
