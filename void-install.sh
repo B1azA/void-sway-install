@@ -30,7 +30,8 @@ xbps-install -S \
   xdg-desktop-portal-gtk \
   pipewire \
   libsa-bluetooth \
-  bluez
+  bluez \
+  wl-clipboard
 
 # Create services
 ln -s /etc/sv/socklog-unix /var/service
