@@ -28,7 +28,6 @@ xbps-install -S \
   noto-fonts-ttf \
   qt5-wayland \
   pipewire \
-  libsa-bluetooth \
   bluez \
   wl-clipboard
 
