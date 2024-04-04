@@ -46,9 +46,23 @@ ln -s /etc/sv/bluetoothd /var/service
 rm /var/service/dhcpcd
 rm /var/service/wpa_supplicant
 
-# Trimming for SSD
-echo '#!/bin/sh
-fstrim /' > /etc/cron.weekly/fstrim
+echo "Enable periodic trimming for root directory (/)? Check which devices allow TRIM with: lsblk --discard."
+select trim in Yes No; do
+  echo $trim;
+  case $trim in
+    Yes)
+      echo '#!/bin/sh
+      fstrim /' > /etc/cron.weekly/fstrim
+      break
+      ;;
+    No)
+      break
+      ;;
+    *)
+      echo "Select 1 or 2."
+    ;;
+  esac
+done
 
 chmod u+x /etc/cron.weekly/fstrim
 
