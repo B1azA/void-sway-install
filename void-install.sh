@@ -4,8 +4,6 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-user = $SUDO_USER
-
 # Update
 xbps-install -Syu
 
@@ -76,10 +74,9 @@ if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
 fi' >> /etc/profile
 
 # Sway
-home = /home/$user
-cd $home
-mkdir $home/.config
-cp /etc/sway $home/.config/
+cd /home/$SUDO_USER
+mkdir /home/$SUDO_USER/.config
+cp /etc/sway /home/$SUDO_USER/.config/
 
 # Audio
 mkdir -p /etc/pipewire/pipewire.conf.d
@@ -87,7 +84,7 @@ ln -s /usr/share/examples/wireplumper/10-wireplumber.conf /etc/pipewire/pipewire
 ln -s /usr/share/examples/wireplumper/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
 
 # Bluetooth
-usermod -a -G bluetooth $USER
+usermod -a -G bluetooth $SUDO_USER
 
 echo "Don't forget to install microcode and graphics!"
 echo "Reboot now!!!"
