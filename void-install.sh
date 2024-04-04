@@ -27,7 +27,6 @@ xbps-install -S \
   wmenu \
   noto-fonts-ttf \
   qt5-wayland \
-  xdg-desktop-portal-gtk \
   pipewire \
   libsa-bluetooth \
   bluez \
