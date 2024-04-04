@@ -4,6 +4,8 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
+user = $SUDO_USER
+
 # Update
 xbps-install -Syu
 
@@ -49,10 +51,10 @@ select trim in Yes No; do
   echo $trim;
   case $trim in
     Yes)
-      chmod u+x /etc/cron.weekly/fstrim
       echo '#!/bin/sh
       fstrim /' > /etc/cron.weekly/fstrim
       break
+      chmod u+x /etc/cron.weekly/fstrim
       ;;
     No)
       break
@@ -74,9 +76,10 @@ if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
 fi' >> /etc/profile
 
 # Sway
-cd ~
-mkdir ~/.config
-cp /etc/sway ~/.config/
+home = /home/$user
+cd $home
+mkdir $home/.config
+cp /etc/sway $home/.config/
 
 # Audio
 mkdir -p /etc/pipewire/pipewire.conf.d
