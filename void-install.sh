@@ -76,7 +76,8 @@ fi' >> /etc/profile
 # Sway
 cd /home/$SUDO_USER
 mkdir /home/$SUDO_USER/.config
-cp /etc/sway /home/$SUDO_USER/.config/
+cp -r /etc/sway /home/$SUDO_USER/.config/
+cd
 
 # Audio
 mkdir -p /etc/pipewire/pipewire.conf.d
