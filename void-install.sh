@@ -29,6 +29,8 @@ xbps-install -S \
   qt5-wayland \
   pipewire \
   bluez \
+  libspa-bluetooth \
+  blueman \
   wl-clipboard
 
 # Create services
