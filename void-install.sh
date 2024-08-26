@@ -15,6 +15,7 @@ xbps-install -S \
   NetworkManager \
   elogind \
   polkit \
+  lxsession \
   mesa-dri \
   wayland \
   wlroots \
@@ -31,7 +32,9 @@ xbps-install -S \
   bluez \
   libspa-bluetooth \
   blueman \
-  wl-clipboard
+  wl-clipboard \
+  grim \
+  slurp
 
 # Create services
 ln -s /etc/sv/socklog-unix /var/service
@@ -76,10 +79,9 @@ if [ -z "${WAYLAND_DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
 fi' >> /etc/profile
 
 # Sway
-cd /home/$SUDO_USER
 mkdir /home/$SUDO_USER/.config
-cp -r /etc/sway /home/$SUDO_USER/.config/
-cd
+mkdir /home/$SUDO_USER/.config/sway
+cp ./config /home/$SUDO_USER/.config/sway/
 
 # Audio
 mkdir -p /etc/pipewire/pipewire.conf.d
