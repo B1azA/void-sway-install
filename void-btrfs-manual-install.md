@@ -83,6 +83,9 @@
 - delete all extra mountings (leave only /dev/sdXx) in /etc/fstab
 - change last column value to 1 (root /dev/sdXm)
 - change last column value to 2 for others
+- change names for UUIDs (when using multiple discs)
+  - use blkid to find UUID of a disc
+  - /dev/sdc2 -> UUID=88e242u842s8283…
 - add "tmpfs /tmp tmpfs defaults,nosuid,nodev 0 0"
 
 ## GRUB
