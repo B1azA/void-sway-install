@@ -86,8 +86,8 @@ chown -R $SUDO_USER .config
 
 # Audio
 mkdir -p /etc/pipewire/pipewire.conf.d
-ln -s /usr/share/examples/wireplumper/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
-ln -s /usr/share/examples/wireplumper/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
+ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
+ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
 
 # Bluetooth
 usermod -a -G bluetooth $SUDO_USER
