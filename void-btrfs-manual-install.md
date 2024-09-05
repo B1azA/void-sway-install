@@ -95,7 +95,8 @@
 ### BIOS
 
 - xbps-install grub
-- grub-install /dev/sdXn
+- grub-install /dev/sdX
+
 - xbps-reconfigure -fa
 - exit
 - umount -R /mnt
@@ -104,3 +105,6 @@
 ## Post install
 
 - sudo ln -s /etc/sv/dhcpcd /var/service
+- install timeshift
+  - timeshift-gtk
+- install and setup grub-btrfs and grub-btrfs-runit
