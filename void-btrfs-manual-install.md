@@ -94,12 +94,15 @@
 
 - xbps-install grub-x86_64-efi
 - grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void"
+- xbps-reconfigure -fa
+- exit
+- umount -R /mnt
+- shutdown -r now
 
 ### BIOS
 
 - xbps-install grub
 - grub-install /dev/sdX
-
 - xbps-reconfigure -fa
 - exit
 - umount -R /mnt
