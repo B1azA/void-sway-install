@@ -111,3 +111,4 @@
 - install timeshift
   - timeshift-gtk
 - install and setup grub-btrfs and grub-btrfs-runit
+- microcode and graphics drivers
