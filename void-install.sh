@@ -68,7 +68,7 @@ select trim in Yes No; do
   esac
 done
 
-echo 'export QT_QPA_PLATFORM=wayland-eql
+echo 'export QT_QPA_PLATFORM=wayland
 export ELM_DISPLAY=wl
 export SDL_VIDEODRIVER=wayland
 export MOZ_ENABLE_WAYLAND=1
